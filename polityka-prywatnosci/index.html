@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polityka prywatności — CeraLab</title>
+    <meta name="description" content="Polityka prywatności CeraLab: jakie dane przetwarzamy, w jakim celu, na jakiej podstawie prawnej i jakie prawa Ci przysługują (RODO)." />
+    <meta name="theme-color" content="#F5F1EB" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>document.documentElement.classList.add('js');</script>
+    <!-- slot:critical -->
+  </head>
+  <body class="page-policy">
+    <!-- slot:sprite -->
+    <a class="skip-link" href="#main">Przejdź do treści</a>
+    <div class="read-progress" aria-hidden="true"><span class="read-progress-bar"></span></div>
+
+    <!-- slot:nav:sub -->
+
+    <main id="main" class="policy">
+      <header class="policy-hero container">
+        <p class="eyebrow policy-eyebrow">Dokumenty · RODO</p>
+        <h1 class="policy-title">Polityka <em>prywatności</em></h1>
+        <p class="policy-lead">Wyjaśniamy prostym językiem, jakie dane przetwarzamy, po co to robimy i jakie prawa Ci przysługują.</p>
+        <p class="policy-meta"><!-- slot:policy-meta --></p>
+      </header>
+
+      <section class="policy-summary container" aria-labelledby="summary-title">
+        <h2 class="policy-summary-title eyebrow" id="summary-title">W skrócie</h2>
+        <ul class="summary-grid">
+          <!-- slot:policy-summary -->
+        </ul>
+      </section>
+
+      <div class="policy-layout container">
+        <aside class="policy-aside">
+          <nav class="toc" aria-label="Spis treści">
+            <details class="toc-details" open>
+              <summary class="toc-summary">Spis treści</summary>
+              <div class="toc-track" aria-hidden="true"><span class="toc-track-fill"></span></div>
+              <ol class="toc-list">
+                <!-- slot:policy-toc -->
+              </ol>
+            </details>
+          </nav>
+        </aside>
+        <article class="policy-article">
+          <!-- slot:policy -->
+        </article>
+      </div>
+    </main>
+
+    <!-- slot:footer -->
+    <!-- slot:cursor -->
+
+    <script type="module" src="/src/pages/privacy.ts"></script>
+  </body>
+</html>

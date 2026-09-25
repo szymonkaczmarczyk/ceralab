@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CeraLab — Nauka, która koi skórę</title>
+    <meta name="description" content="CeraLab — pielęgnacja z ceramidami dla skóry wrażliwej i suchej. Rytuał w trzech krokach: oczyść, odbuduj, zabezpiecz." />
+    <meta name="theme-color" content="#F5F1EB" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>document.documentElement.classList.add('js');</script>
+    <!-- slot:critical -->
+    <link rel="preload" as="image" href="/images/hero-poster-1920.webp" fetchpriority="high" />
+  </head>
+  <body>
+    <!-- slot:sprite -->
+    <a class="skip-link" href="#main">Przejdź do treści</a>
+
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <svg class="preloader-mark" width="96" height="96" viewBox="0 0 100 100">
+        <path d="M89.7 28.9A45 45 0 1 0 89.7 71.1" pathLength="1" fill="none" stroke="currentColor" stroke-width="5.5" />
+        <path d="M75.7 34.6A30 30 0 1 0 75.7 65.4" pathLength="1" fill="none" stroke="currentColor" stroke-width="5.5" />
+      </svg>
+      <span class="preloader-count"><span data-count>0</span>%</span>
+    </div>
+
+    <!-- slot:nav:home -->
+
+    <main id="main">
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <div class="hero-media">
+          <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/images/hero-poster-1920.webp" aria-hidden="true" tabindex="-1">
+            <source src="/videos/background-intro.mp4" type="video/mp4" />
+          </video>
+          <div class="hero-shade" aria-hidden="true"></div>
+        </div>
+        <div class="hero-content container">
+          <p class="eyebrow hero-eyebrow">Laboratorium pielęgnacji skóry wrażliwej</p>
+          <h1 class="hero-title" id="hero-title">Nauka, która <em>koi</em> skórę.</h1>
+          <p class="hero-lead">Trzy produkty z ceramidami. Jeden prosty rytuał dla skóry wrażliwej i suchej.</p>
+          <div class="hero-actions">
+            <a class="btn btn--dark" href="#products" data-magnetic>
+              Poznaj produkty
+              <svg class="btn-icon" width="18" height="18" aria-hidden="true"><use href="#icon-arrow" /></svg>
+            </a>
+          </div>
+        </div>
+        <button class="video-toggle" type="button" aria-pressed="false" aria-label="Wstrzymaj wideo w tle">
+          <span class="video-toggle-icon" aria-hidden="true"></span>
+        </button>
+        <span class="scroll-cue" aria-hidden="true"><span class="scroll-cue-line"></span>Przewiń</span>
+      </section>
+
+      <section class="products" id="products" aria-labelledby="products-title">
+        <div class="products-intro">
+          <p class="eyebrow products-eyebrow">Rytuał w 3 krokach · oczyść → odbuduj → zabezpiecz</p>
+          <h2 class="products-title" id="products-title">Nasze produkty</h2>
+          <ul class="arches">
+            <!-- slot:arches -->
+          </ul>
+        </div>
+
+        <div class="showcase" data-showcase>
+          <div class="showcase-bg" aria-hidden="true"></div>
+          <nav class="showcase-progress" aria-label="Wybór produktu">
+            <ol class="progress-list">
+              <!-- slot:progress -->
+            </ol>
+          </nav>
+          <div class="showcase-stage">
+            <!-- slot:products -->
+          </div>
+        </div>
+      </section>
+
+      <section class="process" id="process" aria-labelledby="process-title">
+        <div class="process-grid container">
+          <div class="process-head">
+            <p class="eyebrow">Jak powstają nasze kosmetyki</p>
+            <h2 class="process-title" id="process-title">Proces, który <em>gwarantuje sukces</em></h2>
+            <p class="process-intro">Od pierwszej potrzeby skóry do gotowego rytuału. Każdy etap ma jeden cel: skuteczną i łagodną pielęgnację.</p>
+            <div class="process-rail" aria-hidden="true"><span class="process-rail-fill"></span></div>
+          </div>
+          <ol class="process-steps">
+            <!-- slot:process -->
+          </ol>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee-track">
+            <span>Skontaktuj się</span><span>Skontaktuj się</span><span>Skontaktuj się</span><span>Skontaktuj się</span>
+            <span>Skontaktuj się</span><span>Skontaktuj się</span><span>Skontaktuj się</span><span>Skontaktuj się</span>
+          </div>
+        </div>
+        <div class="contact-grid container">
+          <div class="contact-lead">
+            <h2 class="contact-title" id="contact-title">Porozmawiajmy</h2>
+            <a class="say-hello" href="mailto:kontakt@ceralab.pl" data-magnetic>
+              <span class="say-hello-circle"><svg width="24" height="24" aria-hidden="true"><use href="#icon-arrow" /></svg></span>
+              <span>Napisz do nas</span>
+            </a>
+          </div>
+          <span class="contact-divider" aria-hidden="true"></span>
+          <dl class="contact-list">
+            <div class="contact-item"><dt>E-mail</dt><dd><a href="mailto:kontakt@ceralab.pl">kontakt@ceralab.pl</a></dd></div>
+            <div class="contact-item"><dt>Telefon</dt><dd><a href="tel:+48000000000">+48 000 000 000</a></dd></div>
+            <div class="contact-item"><dt>Sklep</dt><dd><a href="#">ceralab.pl/sklep</a></dd></div>
+            <div class="contact-item"><dt>Instagram</dt><dd><a href="#">@ceralab</a></dd></div>
+          </dl>
+        </div>
+      </section>
+    </main>
+
+    <!-- slot:footer -->
+    <!-- slot:cursor -->
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+:root {
+
+  --color-bg:          #F5F1EB;
+  --color-surface:     #FBF9F6;
+  --color-studio:      #F1F0F1;
+  --color-ink:         #1C1A17;
+  --color-ink-soft:    #564F47;
+  --color-line:        #D9D0C4;
+  --color-gold:        #B8924F;
+  --color-gold-ink:    #7D5F2A;
+  --color-blush:       #EBCBB9;
+  --color-dark:        #1C1A17;
+  --color-on-dark:     #F5F1EB;
+  --color-on-dark-soft:#B5ADA2;
+
+  --color-cleanse:     #E6E1D8;
+  --color-serum:       #F0DDB4;
+  --color-cream:       #EDE3D3;
+
+  --font-display: 'Instrument Serif', 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fs-display: clamp(3.5rem, 13vw, 12rem);
+  --fs-hero:    clamp(3rem, 9vw, 8.5rem);
+  --fs-h2:      clamp(2.75rem, 7vw, 6rem);
+  --fs-h3:      clamp(2.25rem, 4.5vw, 4rem);
+  --fs-lead:    clamp(1.0625rem, 1.4vw, 1.25rem);
+  --fs-body:    1rem;
+  --fs-small:   0.875rem;
+  --fs-eyebrow: 0.75rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --container: 1440px;
+  --section-y: clamp(5rem, 12vw, 10rem);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   0.3s;
+  --dur-base:   0.8s;
+  --dur-slow:   1.4s;
+
+  --nav-h: 72px;
+}
+
