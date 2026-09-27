@@ -7,7 +7,7 @@ export const company = {
   nip: ph('NIP'),
   regon: ph('REGON'),
   register: ph('KRS lub wpis do CEIDG'),
-  email: 'kontakt@ceralab.pl', // TODO: potwierdzić
+  email: 'kontakt@ceralab.pl',
   hosting: ph('nazwa dostawcy hostingu'),
   mail: ph('nazwa dostawcy poczty e-mail'),
   logRetention: ph('np. 30 dni — potwierdzić u dostawcy hostingu'),

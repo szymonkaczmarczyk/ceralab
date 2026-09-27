@@ -1,5 +1,7 @@
 import { gsap, mm, MQ, ScrollTrigger, scrollToElement } from './setup';
 
+const SECTIONS_AFTER_PINS = -1;
+
 export function initNav() {
   const nav = document.querySelector<HTMLElement>('#nav');
   if (!nav) return;
@@ -57,6 +59,7 @@ export function initNav() {
       trigger: contact,
       start: 'top 48px',
       end: 'bottom 48px',
+      refreshPriority: SECTIONS_AFTER_PINS,
       onToggle: ({ isActive }) => nav.classList.toggle('is-on-dark', isActive),
     });
   }
@@ -68,6 +71,7 @@ export function initNav() {
       trigger: section,
       start: 'top 50%',
       end: 'bottom 50%',
+      refreshPriority: SECTIONS_AFTER_PINS,
       onToggle: ({ isActive }) => link.classList.toggle('is-active', isActive),
     });
   });

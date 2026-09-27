@@ -37,7 +37,12 @@ npm run build            # tsc + build produkcyjny do dist/
 npm run preview          # podgląd builda
 npm run typecheck        # tsc --noEmit
 npm run optimize:images  # regeneruje public/images i public/videos z images/ i videos/
+npm run test:e2e         # testy e2e + axe (Playwright) na świeżym buildzie produkcyjnym
+npm run test:e2e:ui      # to samo w trybie UI Playwrighta
+npm run test:e2e:report  # raport HTML z ostatniego przebiegu
 ```
+
+Testy e2e: przed pierwszym uruchomieniem `npx playwright install chromium`. Konfiguracja buduje stronę do katalogu tymczasowego systemu i serwuje ją na porcie **4317** (nie 4173 - żeby nigdy nie testować starego `npm run preview`). Przy nietypowym środowisku można wskazać własny Chromium przez `PW_CHROMIUM_PATH`.
 
 Po podmianie zdjęć w `images/products/` lub wideo w `videos/` zawsze uruchom `npm run optimize:images`. Poster wideo (`images/hero-poster.jpg`) to pierwsza klatka filmu — przy zmianie filmu trzeba go wyciągnąć ponownie.
 
@@ -98,7 +103,7 @@ Paleta wyprowadzona z **opakowań** (przezroczyste szkło + złote zamknięcia),
   --color-ink-soft:  #564F47;  /* tekst drugorzędny */
   --color-line:      #D9D0C4;
   --color-gold:      #B8924F;  /* złoto opakowań — TYLKO dekoracja */
-  --color-gold-ink:  #7D5F2A;  /* złoto do tekstu */
+  --color-gold-ink:  #7A5C28;  /* złoto do tekstu */
   --color-blush:     #EBCBB9;  /* brzoskwinia — tło „Nasze produkty” */
   --color-dark:      #1C1A17;
   --color-on-dark:   #F5F1EB;
@@ -110,7 +115,7 @@ Paleta wyprowadzona z **opakowań** (przezroczyste szkło + złote zamknięcia),
 }
 ```
 
-Kontrast sprawdzony (WCAG AA, min. 4.5:1): ink/bg 15.4, ink-soft/bg 6.2+, ink-soft/blush ≥ 4.6, gold-ink/bg 5.3, on-dark/dark 15.4, on-dark-soft/dark 7.8. `--color-gold` nie nadaje się na tekst.
+Kontrast sprawdzony (WCAG AA, min. 4.5:1): ink/bg 15.4, ink-soft/bg 6.2+, ink-soft/blush ≥ 4.6, gold-ink/bg 5.5, gold-ink/serum 4.6 (najciaśniejsze tło produktu), on-dark/dark 15.4, on-dark-soft/dark 7.8. `--color-gold` nie nadaje się na tekst.
 
 ### Typografia
 
@@ -220,6 +225,7 @@ Kolejność ustalona z właścicielem (2026-09-25): **wideo → produkty → pro
 8. `markers: true` tylko lokalnie — nie commituj.
 9. Nie dodawaj globalnego `will-change` na wszystkie elementy; tylko na czas trwania animacji dla ciężkich warstw.
 10. SplitText dziel na **słowa z maską** (`splitWords()` z `setup.ts`), nie na linie — słowa nie zmieniają się przy zmianie szerokości, więc animacja się nie psuje. Maski mają zapas na polskie ogonki (`.sw-mask` w `base.css`).
+11. **Kolejność ScrollTriggerów a piny.** GSAP liczy triggery w kolejności tworzenia. Trigger sekcji leżącej **pod** przypiętą sekcją, a utworzony **przed** nią (np. w `initNav()`, które startuje w `bootCommon()` przed `initProducts()`), dostaje pozycje bez wysokości pina. Takie triggery muszą mieć `refreshPriority: -1` (stała `SECTIONS_AFTER_PINS` w `nav.ts`).
 
 ## Dostępność
 
@@ -252,7 +258,7 @@ Na telefonie: brak kursora, brak paralaksy od myszy, brak pinowania sekcji produ
 
 Zmiana jest skończona, gdy:
 
-- [ ] `npm run typecheck` i `npm run build` przechodzą bez błędów,
+- [ ] `npm run typecheck`, `npm run build` i `npm run test:e2e` przechodzą bez błędów,
 - [ ] strona działa i wygląda poprawnie na 375 px, 768 px i 1440 px szerokości,
 - [ ] wszystkie 3 produkty są widoczne i czytelne z włączonym `prefers-reduced-motion`,
 - [ ] strona jest czytelna z wyłączonym JavaScriptem,
@@ -291,6 +297,20 @@ Aktualizacja skilla: sklonuj repo ponownie, skopiuj `.claude/skills/*` do `CeraL
 ## Dziennik zmian i plany
 
 Wpisy od najnowszego. Każda istotna zmiana lub decyzja trafia tutaj (data, co, dlaczego).
+
+### 2026-09-27 – testy e2e (Playwright + axe) i poprawki, które wykryły
+- **Zestaw testów** w `e2e/` (projekty `desktop` 1440×900 i `mobile` Pixel 7): smoke wszystkich stron (status, jedno `h1`, zero błędów JS i konsoli, zero zasobów 4xx), brak poziomego scrolla (320-1440 px), czytelność bez JS, meta SEO + robots + sitemap, nawigacja (kotwice, fokus, aktywny link, menu mobilne, skip link, wejście z `/#sekcja`), wideo, reduced-motion, showcase z klawiatury, spis treści polityki, wewnętrzne linki i kotwice, **axe WCAG 2.2 AA** na każdej stronie (z reduced-motion i po intro z animacjami) + otwarte menu mobilne. Wynik: 85 zaliczonych, stabilnie w kolejnych przebiegach. Pominięcia są celowe (test tylko dla jednego urządzenia).
+- **Błąd: aktywny link i ciemna nawigacja liczone bez pina.** Po kliknięciu „Proces” podświetlał się „Kontakt”, a nawigacja ciemniała nad jasną sekcją procesu - triggery z `initNav()` były przesunięte o ~2 wysokości ekranu (spacer przypiętego showcase). Naprawa: `refreshPriority: -1` (zasada 11). Efekt uboczny poprawki, zgodny z projektem: przy 1440×900 kontakt ze stopką jest niższy niż ekran i nigdy nie dojeżdża pod nawigację, więc ciemny wariant pojawia się tylko na niższych ekranach. **Do decyzji właściciela**, czy tak ma zostać (alternatywa: przełączać przy `top 50%` albo wydłużyć sekcję kontaktu).
+- **Błąd: kontrast.** `--color-gold-ink` na tle serum (`#F0DDB4`) miał 4.43:1 (kategoria produktu „Serum rozświetlające”). Zmiana `#7D5F2A` → `#7A5C28` (serum 4.63, porcelana 5.5) - wizualnie praktycznie bez różnicy.
+- **Błąd: serwer 404 w dev/preview padał.** Wyjątek w handlerze 404 (brak pliku, źle zakodowany URL typu `/%E0%A4%A.html` w `decodeURIComponent`, absolutny `outDir` sklejany przez `join`) był nieobsłużonym odrzuceniem Promise i zabijał cały serwer. Teraz `try/catch` → `next(error)`, bezpieczne dekodowanie i `resolve()` dla `outDir`.
+- Znane zaślepki raportowane przez testy jako adnotacja (nie błąd): 5 linków `href="#"` na stronie głównej.
+
+### 2026-09-26 – SEO: meta, robots.txt, sitemap.xml
+- Tytuł, opis, canonical, Open Graph, Twitter Card i JSON-LD `Organization` (tylko strona główna) generowane przez slot `<!-- slot:seo:home -->` / `<!-- slot:seo:privacy -->` z `renderSeo()` w `layout.ts`. Tytuły i opisy stron zmieniasz **tylko** w `seoPages` w `layout.ts` - nie wpisuj `<title>` ani `meta description` ręcznie do HTML.
+- `robots.txt` i `sitemap.xml` generowane przy buildzie (wtyczka `ceralab-seo-files` w `vite.config.ts`), w dev serwowane pod tymi samymi adresami. Nowa podstrona = nowy wpis w `seoPages`.
+- Domena `SITE_URL = 'https://ceralab.pl'` - **zaślepka, `TODO: potwierdzić`** przed wdrożeniem.
+- `og:image` to tymczasowo poster wideo (WebP 1920×1080). Docelowo: dedykowany obraz 1200×630 w JPG/PNG (część platform słabo obsługuje WebP w podglądach).
+- 404 bez zmian (`noindex`, poza sitemapą).
 
 ### 2026-09-25 — README dla GitHuba
 - Dodano `README.md` (po polsku): opis strony, podgląd, sekcje, technologie, architektura, dostępność, prywatność, uruchomienie, struktura, edycja treści, wdrożenie, status.
