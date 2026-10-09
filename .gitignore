@@ -27,6 +27,12 @@ id_ed25519*
 secrets/
 credentials.json
 client_secret*.json
+.npmrc
+
+.vercel/
+.netlify/
+
+docs/audyt*
 
 logs/
 *.log
@@ -87,6 +93,20 @@ env/
 .claude/
 .gemini/
 .agents/
+.cursor/
+.windsurf/
+.continue/
+.aider*
+.codex/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+GEMINI.md
+zasady-projektu.md
+.cursorrules
+.windsurfrules
+.clinerules
+.github/copilot-instructions.md
 scratch/
 tmp/
 temp/

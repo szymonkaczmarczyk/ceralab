@@ -193,6 +193,10 @@ CeraLab/
 
 `npm run build` tworzy statyczny katalog `dist/` gotowy do wrzucenia na dowolny hosting (Netlify, Vercel, Cloudflare Pages, GitHub Pages). Strona `404.html` jest tam serwowana automatycznie; na własnym serwerze trzeba ją wskazać, np. `ErrorDocument 404 /404.html` w Apache.
 
+## Licencja
+
+Kod udostępniony na licencji MIT - szczegóły w pliku [LICENSE](LICENSE). Copyright (c) 2026 Szymon Kaczmarczyk.
+
 ---
 
-<sub>Logo, zdjęcia produktów i wideo są własnością marki CeraLab. Licencja kodu nie została jeszcze określona.</sub>
+<sub>Logo, zdjęcia produktów i wideo są własnością marki CeraLab i nie są objęte licencją MIT.</sub>
